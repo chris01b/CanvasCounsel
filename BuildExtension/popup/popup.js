@@ -1,8 +1,9 @@
 import chromep from 'chrome-promise';
 
-paypal.Buttons().render('#paypal-button-container');
-
 $(document).ready(() => {
+
+  paypal.Buttons().render('#paypal-button-container');
+
   $("#run").click(async () => {
 
     let payload;
