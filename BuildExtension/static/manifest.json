@@ -2,18 +2,20 @@
     "name": "canvasApp",
     "version": "1.0",
     "manifest_version": 2,
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.paypal.com; object-src 'self'",
     
     "background": {
         "page": "background.html"
     },
-    "browser_action": {
+    "page_action": {
         "default_icon": {
             "64": "images/icon64.png"
         },
-        "default_title": "canvasApp"
+        "default_title": "canvasApp",
+        "default_popup": "popup.html"
     },
     "permissions": [
+        "declarativeContent",
         "tabs",
         "https://canvas.instructure.com/courses/*/quizzes/*"
     ]

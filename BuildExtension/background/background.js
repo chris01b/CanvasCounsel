@@ -9,7 +9,7 @@ import injectAnswerString from './Strings/injectAnswer';
 import generateHTML from './generateHTML';
 
 const socket = io.connect('http://localhost:3000');
-let tab;
+let tabID;
 
 async function waitForQuestions() {
   try {
@@ -32,13 +32,17 @@ async function waitForQuestions() {
 
 async function waitForClick() { 
   try {
-    tab = await chromep.browserAction.onClicked.addListener();
-    console.log('browserAction clicked on', tab.id);
+    let [message, sender, sendResponse] = await chromep.runtime.onMessage.addListener();
+    if (message.action == 'run') {
+      tabID = message.src.id;
+      console.log('browserAction clicked on', tabID);
 
-    chrome.tabs.executeScript(tab.id, {code: jqueryString()});
-    chrome.tabs.executeScript(tab.id, {code: scrapeQuestionsString()});
+      chrome.tabs.executeScript(tabID, {code: jqueryString()});
+      chrome.tabs.executeScript(tabID, {code: scrapeQuestionsString()});
+      sendResponse('Ran');
+      waitForQuestions();
+    }
   } catch (e) {console.error(e)}
-  waitForQuestions();
 }
 
 socket.once('connect', () => {
@@ -51,7 +55,7 @@ socket.once('connect', () => {
     console.log(answer);
     generateHTML(answer[1]).then(answerHTMLThing => {
       let answerHTML = firstHTML(answer[0]) + '\n' + answerHTMLThing + '\n' + secondHTML();
-      chrome.tabs.executeScript(tab.id, {code: injectAnswerString(answer[0], answerHTML)});
+      chrome.tabs.executeScript(tabID, {code: injectAnswerString(answer[0], answerHTML)});
     });
   });
 
@@ -60,4 +64,12 @@ socket.once('connect', () => {
   });
 });
 
-
+chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+  chrome.declarativeContent.onPageChanged.addRules([{
+    conditions: [new chrome.declarativeContent.PageStateMatcher({
+      pageUrl: {hostEquals: 'canvas.instructure.com'},
+    })
+    ],
+    actions: [new chrome.declarativeContent.ShowPageAction()]
+  }]);
+});

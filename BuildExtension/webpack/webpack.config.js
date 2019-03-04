@@ -7,7 +7,8 @@ module.exports = {
   mode: 'development',
 
   entry: {
-    background: path.join(__dirname, '../src/background.js'),
+    background: path.join(__dirname, '../background/background.js'),
+    popup: path.join(__dirname, '../popup/popup.js'),
   },
 
   output: {
