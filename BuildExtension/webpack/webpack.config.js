@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     background: path.join(__dirname, '../background/background.js'),
     popup: path.join(__dirname, '../popup/popup.js'),
+    payment: path.join(__dirname, '../payment/payment.js'),
   },
 
   output: {

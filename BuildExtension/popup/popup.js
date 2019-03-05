@@ -1,11 +1,13 @@
 import chromep from 'chrome-promise';
 
+
 $(document).ready(() => {
 
-  paypal.Buttons().render('#paypal-button-container');
+  $("#paypal-button").click(() => {
+    chrome.tabs.create({'url': chrome.extension.getURL('payment.html')});
+  });
 
-  $("#run").click(async () => {
-
+  $("#run-button").click(async () => {
     let payload;
     try {
       let tabs = await chromep.tabs.query({active: true, currentWindow: true});
@@ -17,6 +19,5 @@ $(document).ready(() => {
       let response = await chromep.runtime.sendMessage(payload);
       console.log(response);
     } catch(e) {console.error(e)}
-
   }); 
 });
