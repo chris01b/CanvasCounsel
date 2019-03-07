@@ -17,6 +17,7 @@
     "permissions": [
         "declarativeContent",
         "tabs",
-        "https://canvas.instructure.com/courses/*/quizzes/*"
+        "https://canvas.instructure.com/courses/*/quizzes/*",
+        "http://localhost:3000/"
     ]
 }

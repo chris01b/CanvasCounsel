@@ -1,1 +1,1 @@
-const monitorRequests = require('./questionHandler.js')();
+const questionHandler = require('./questionHandler.js')();

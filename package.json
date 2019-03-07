@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/chris01b/canvasApp#readme",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.0",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "socket.io": "^2.2.0"
