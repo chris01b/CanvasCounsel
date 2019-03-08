@@ -1,5 +1,9 @@
 import chromep from 'chrome-promise';
 
+function log(message) {
+  $( "#console" ).append( '<p>"' + message + '"</p>' );
+}
+
 $(document).ready(() => {
   paypal.Buttons({
     createOrder: function(data, actions) {
@@ -13,7 +17,7 @@ $(document).ready(() => {
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
-        alert('Transaction completed by ' + details.payer.name.given_name);
+        log('Transaction completed by ' + details.payer.name.given_name);
         // Call your server to save the transaction
         return fetch('http://localhost:3000/paypal-transaction-complete', {
           method: 'post',

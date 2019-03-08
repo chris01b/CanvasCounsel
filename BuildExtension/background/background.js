@@ -5,7 +5,6 @@ import jqueryString from './Strings/jquery';
 import scrapeQuestionsString from './Strings/scrapeQuestions';
 import { firstHTML, secondHTML } from './Strings/html';
 import injectAnswerString from './Strings/injectAnswer';
-
 import generateHTML from './generateHTML';
 
 const socket = io.connect('http://localhost:3000');
