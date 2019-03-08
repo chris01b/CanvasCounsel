@@ -19,4 +19,13 @@ question.parents().eq(2).after(answerHTML);
 
 console.log('Injected answer ` + number + `');
 
+$(".answer_grabber").hover(
+  function() {
+    $(this).find(".answer_holder").css("visibility", "visible");
+  },
+  function() {
+    $(this).find(".answer_holder").css("visibility", "hidden");
+  }
+);
+
 `}

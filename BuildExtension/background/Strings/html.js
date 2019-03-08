@@ -1,5 +1,6 @@
 export function firstHTML(number) {
-  return String.raw`<div role="region" aria-label="Question" class="quiz_sortable question_holder " id="" style="" data-group-id="">
+  return String.raw`<span class="answer_grabber">
+<div role="region" aria-label="Question" class="quiz_sortable question_holder answer_holder" id="" data-group-id="" style="visibility: hidden">
 	<div style="display: block; height: 1px; overflow: hidden;">&nbsp;</div>
 	<div class="display_question question multiple_choice_question" id="question_60950872">
 		<div class="header">
@@ -25,5 +26,6 @@ export function secondHTML() {
 		</div>
 		<div class="clear"></div>
 	</div>
-</div>`;
+</div>
+</span>`;
 }
